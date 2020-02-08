@@ -2,6 +2,7 @@ package com.task.betslip.models;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -19,12 +20,15 @@ public class CreateBetslipRequest implements Serializable {
 	private Long customerId;
 	
 	@NotNull(message = "Please provide bet factor for team A")
+	@Min(value = 0, message = "Bet factor for team A must be greater than or equal to 0")
 	private Double teamAFactor;
 	
 	@NotNull(message = "Please provide bet factor for tie/draw")
+	@Min(value = 0, message = "Bet factor for tie/draw must be greater than or equal to 0")
 	private Double tieFactor;
 	
 	@NotNull(message = "Please provide bet factor for team B")
+	@Min(value = 0, message = "Bet factor for team B must be greater than or equal to 0")
 	private Double teamBFactor;
 
 	/**
