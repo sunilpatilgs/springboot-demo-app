@@ -5,6 +5,9 @@ The resource folder contains the data.sql which creates the required scheme for 
 It creates 2 tabled CUSTOMER and BETSLIP
 And also loads some default customer.
 
+Run the below command to start the application from folder of pom.xml
+mvn spring-boot:run
+
 The application swagger-ui can be accessed on the below url once the application is started.
 http://localhost:8080/demo/swagger-ui.html#/
 
