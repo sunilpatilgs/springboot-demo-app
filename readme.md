@@ -14,3 +14,6 @@ http://localhost:8080/demo/h2-console/
 Also application is integrated with spring boot actuator.
 
 Application Class BetslipApplication.java
+Controller Test Class 'BetslipControllerTest.java'
+Repository Test Class 'BetslipRepositoryTest.java'
+Application Test class 'BetslipApplicationTests.java'
