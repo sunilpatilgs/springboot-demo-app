@@ -1,12 +1,10 @@
 package com.task.betslip.controller;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
@@ -118,50 +116,12 @@ public class BetslipControllerTest {
 	}
 	
 	@Test
-	public void create_updateBetslip_validationTest() throws Exception {
-		
-		CreateBetslipRequest createBetslipRequest = new CreateBetslipRequest();
-    	createBetslipRequest.setCustomerId(1L);
-    	createBetslipRequest.setTeamAFactor(10.0);
-    	createBetslipRequest.setTeamBFactor(20.0);
-    	createBetslipRequest.setTieFactor(5.0);
-    	
-    	mockMvc.perform(post("/api/v1/betslip/create")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(new ObjectMapper().writeValueAsString(createBetslipRequest)))
-                .andExpect(status().isCreated());
-    	
-    	
-    	createBetslipRequest.setCustomerId(1L);
-    	createBetslipRequest.setTeamAFactor(12.0);
-    	createBetslipRequest.setTeamBFactor(null);
-    	createBetslipRequest.setTieFactor(60.0);
-    	
-    	mockMvc.perform(put("/api/v1/betslip/update/1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(new ObjectMapper().writeValueAsString(createBetslipRequest)))
-                .andExpect(status().is4xxClientError());
-
-	}
-	
-	@Test
 	public void getBetslipDetailsTest() throws Exception {
-		mockMvc.perform(get("/api/v1/betslip/1")).andDo(print()).andExpect(status().isOk()).andExpect(content().string(containsString("")));
+		mockMvc.perform(get("/api/v1/betslip/1")).andDo(print()).andExpect(status().isOk());
 	}
 	
 	@Test
 	public void deleteBetslipTest() throws Exception {
-		CreateBetslipRequest createBetslipRequest = new CreateBetslipRequest();
-    	createBetslipRequest.setCustomerId(1L);
-    	createBetslipRequest.setTeamAFactor(10.0);
-    	createBetslipRequest.setTeamBFactor(20.0);
-    	createBetslipRequest.setTieFactor(5.0);
-    	
-    	mockMvc.perform(post("/api/v1/betslip/create")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(new ObjectMapper().writeValueAsString(createBetslipRequest)))
-                .andExpect(status().isCreated());
-    	
 		mockMvc.perform(delete("/api/v1/betslip/1")).andDo(print()).andExpect(status().isOk());
 	}
 
