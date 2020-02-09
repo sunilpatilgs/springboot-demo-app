@@ -3,7 +3,7 @@ package com.task.betslip.models;
 import java.io.Serializable;
 
 /**
- * @author soNu
+ * @author sunil
  *
  */
 public class Betslip implements Serializable{
