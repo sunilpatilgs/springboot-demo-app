@@ -12,6 +12,8 @@ public enum BetslipStatus {
 	
 	UPDATE_SUCCESS(0, "info", "Betslip updated Successfuly!!!"),
 	
+	RETRIEVE_SUCCESS(0, "info", "Betslip Found"),
+	
 	CUSTOMER_NOT_FOUND(1, "warn", "Customer not found"),
 	
 	BETSLIP_NOT_FOUND(2, "warn", "Betslip not found!!!"),

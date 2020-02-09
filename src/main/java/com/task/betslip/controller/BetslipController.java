@@ -30,8 +30,8 @@ public class BetslipController implements BetslipAPI {
 	}
 
 	@Override
-	public BetslipDetailResponse getBetslipDetails(@PathVariable(name = "betId", required = true) Long betId) {
-		return betslipService.getBetslipDetails(betId);
+	public ResponseEntity<BetslipDetailResponse> getBetslipDetails(@PathVariable(name = "betId", required = true) Long betId) {
+		return new ResponseEntity<>(betslipService.getBetslipDetails(betId), HttpStatus.OK);
 	}
 	
 	@Override

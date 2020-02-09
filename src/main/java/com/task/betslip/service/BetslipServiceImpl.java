@@ -37,18 +37,22 @@ public class BetslipServiceImpl extends BaseService implements BetslipService {
 
 	@Override
 	public BetslipDetailResponse getBetslipDetails(Long betId) {
+		BetslipDetailResponse betslipDetailResponse = new BetslipDetailResponse();
 		Optional<Betslip> betslip = betslipRepository.findById(betId);
 		if (betslip.isPresent()) {
-			BetslipDetailResponse betslipDetailResponse = new BetslipDetailResponse();
-			betslipDetailResponse.setId(betslip.get().getId());
-			betslipDetailResponse.setTeamAFactor(betslip.get().getTeamAFactor());
-			betslipDetailResponse.setTieFactor(betslip.get().getTieFactor());
-			betslipDetailResponse.setTeamBFactor(betslip.get().getTeamBFactor());
-			betslipDetailResponse.setStatus(betslip.get().getStatus());
-			return betslipDetailResponse;
+			com.task.betslip.models.Betslip betslipData = new com.task.betslip.models.Betslip();
+			betslipData.setId(betslip.get().getId());
+			betslipData.setTeamAFactor(betslip.get().getTeamAFactor());
+			betslipData.setTieFactor(betslip.get().getTieFactor());
+			betslipData.setTeamBFactor(betslip.get().getTeamBFactor());
+			betslipData.setStatus(betslip.get().getStatus());
+			betslipDetailResponse.setBetslip(betslipData);
+			betslipDetailResponse.setStatus(createSatus(BetslipStatus.RETRIEVE_SUCCESS));
+		}else {
+			logger.warn("Betslip not found");
+			betslipDetailResponse.setStatus(createSatus(BetslipStatus.BETSLIP_NOT_FOUND));
 		}
-		logger.warn("Betslip not found");
-		return null;
+		return betslipDetailResponse;
 	}
 
 	@Override

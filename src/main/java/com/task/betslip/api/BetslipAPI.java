@@ -27,7 +27,7 @@ public interface BetslipAPI {
 	@GetMapping(value = "/{betId}")
 	@ApiOperation(value = "Get Betslip Details", response = BetslipDetailResponse.class)
 	@ApiResponses(value = {@ApiResponse(code = 200, message = "OK")})
-	public BetslipDetailResponse getBetslipDetails(Long betId);
+	public ResponseEntity<BetslipDetailResponse> getBetslipDetails(Long betId);
 	
 	@PostMapping(value = "/create")
 	@ApiOperation(value = "Create Betslip", response = Status.class)
