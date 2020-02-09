@@ -30,7 +30,7 @@ public class BetslipRepositoryTest {
     private CustomerRepository customerRepository;
     
     @Test
-    public void findBetslip() {
+    public void findBetslipTest() {
     	Betslip betslip = new Betslip();
     	betslip.setCustomer(customerRepository.findById(1l).get());
     	betslip.setStatus("created");
@@ -52,4 +52,59 @@ public class BetslipRepositoryTest {
         assertThat(result.getTieFactor(), equalTo(5.0));
     	
     }
+    
+    @Test
+    public void updateBetslipTest() {
+		
+    	Betslip betslip = new Betslip();
+    	betslip.setCustomer(customerRepository.findById(1l).get());
+    	betslip.setStatus("created");
+    	betslip.setTeamAFactor(10.0);
+    	betslip.setTeamBFactor(20.0);
+    	betslip.setTieFactor(5.0);
+    	
+    	testEntityManager.persist(betslip);
+    	
+    	testEntityManager.flush();
+    	testEntityManager.clear();
+    	
+    	Betslip modifiedBetslip = betslipRepository.findById(betslip.getId()).get();
+    	//update team A bet factor
+    	modifiedBetslip.setTeamAFactor(25.0);
+    	
+    	testEntityManager.persist(modifiedBetslip);
+    	
+    	testEntityManager.flush();
+    	testEntityManager.clear();
+    	
+    	Betslip result = betslipRepository.findById(modifiedBetslip.getId()).get();
+    	
+    	
+    	assertThat(result, notNullValue());
+        assertThat(result.getTeamAFactor(), equalTo(25.0));
+        assertThat(result.getTeamBFactor(), equalTo(20.0));
+        assertThat(result.getTieFactor(), equalTo(5.0));
+	}
+    
+    @Test
+    public void deleteBetslipTest() {
+    	Betslip betslip = new Betslip();
+    	betslip.setCustomer(customerRepository.findById(1l).get());
+    	betslip.setStatus("created");
+    	betslip.setTeamAFactor(10.0);
+    	betslip.setTeamBFactor(20.0);
+    	betslip.setTieFactor(5.0);
+    	
+    	testEntityManager.persist(betslip);
+    	
+    	testEntityManager.flush();
+    	testEntityManager.clear();
+    	
+    	Betslip result = betslipRepository.findById(betslip.getId()).get();
+    	
+    	betslipRepository.delete(result);
+    	
+    	assertThat(betslipRepository.findById(betslip.getId()).isPresent(), equalTo(false));
+	}
+    
 }
