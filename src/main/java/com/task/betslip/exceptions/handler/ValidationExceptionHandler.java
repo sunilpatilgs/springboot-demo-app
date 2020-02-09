@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  *
  */
 @ControllerAdvice
-public class CustomGlobalExceptionHandler extends
+public class ValidationExceptionHandler extends
 		ResponseEntityExceptionHandler {
 
 	@Override
